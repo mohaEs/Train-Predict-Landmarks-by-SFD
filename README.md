@@ -1,4 +1,5 @@
-# Landmark detection by shapenet
+# Shapenet for Landmark detection/localization
+# Train and predict
 
 This repository shows a detail example of using shapenet for landmark detection.
 The original method and source repository is:
