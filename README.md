@@ -32,18 +32,18 @@ If there is no .kaggle folder yet, please create it first.
 ## Usage
 
 1- first prepare data from a zip file: <br/>
-$ python ./scripts/prepare_datasets.py --helen --hzip ./helen.zip --ddir ./prepared_helen
+> python ./scripts/prepare_datasets.py --helen --hzip ./helen.zip --ddir ./prepared_helen
 
 2-correct the config file and locate it <br/>
 set pca path, data path, epochs, saving model path and etc. 
 
 3- train it by <br/>
 passing the config file as argument <br/>
-$ python ./scripts/train_single_shapenet.py --config ./helen.config --verbose
+> python ./scripts/train_single_shapenet.py --config ./helen.config --verbose
 
 4- predict <br/>
 pas the input path, output path, weight file and config file locations as arguments: <br/>
-$ python ./scripts/predict_from_net.py --in_path ./prepared_helen/helen/testset --out_path ./output_predict/  --weight_file  ./Trained_Model/checkpoint_best.pth --config_file ./helen.config  --visualize 
+> python ./scripts/predict_from_net.py --in_path ./prepared_helen/helen/testset --out_path ./output_predict/  --weight_file  ./Trained_Model/checkpoint_best.pth --config_file ./helen.config  --visualize 
 
 Output of our experiment: (it was just 5 epochs which was trained on a few images) <br/>
 
