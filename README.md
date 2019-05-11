@@ -48,3 +48,61 @@ pas the input path, output path, weight file and config file locations as argume
 Output of our experiment: (it was just 5 epochs which was trained on a few images) <br/>
 
 ![Alt text](./output_predict/visualization/31681454_1.png?raw=true "Title")
+
+
+## hint: Converting your dataset 
+This an exemplary code to create a zip file called helen.zip from your own dataset and landmarks which suitable format for training/predicting by above mentioned procedure.
+
+It is supposed our image files (.png) and landmark files (.csv) are in [path_train_data '\temp_train_png\'] and [ path_train_data '\temp_train_lm\'] folders with the same name correspondigly. My n_points was 23.
+
+
+```
+validation_ratio=0.05;
+
+path_train_png=[path_train_data '\temp_train_png\'];
+path_train_lm=[ path_train_data '\temp_train_lm\'];
+
+Path_write_train=[path_train_data '\helen\trainset\'];
+Path_write_test=[path_train_data  '\helen\testset\'];
+mkdir(Path_write_train);
+mkdir(Path_write_test);
+
+DirPngs=dir(fullfile(path_train_png,'*.png'));
+
+Num_samples=length(DirPngs);
+Ind_val=randperm(Num_samples,round(Num_samples*validation_ratio));
+
+for SampleCounter=1:Num_samples
+
+  ImageFileName= DirPngs(SampleCounter).name;
+  FileName=ImageFileName(1:end-3); 
+  LMs=csvread([path_train_lm ImageFileName(1:end-4) '.csv']);
+  if isempty(find(SampleCounter==Ind_val))
+    fileID = fopen([Path_write_train '\' FileName 'pts'],'w');
+      copyfile([path_train_png ImageFileName],[Path_write_train ImageFileName]);
+  else
+    fileID = fopen([Path_write_test '\' FileName 'pts'],'w');
+      copyfile([path_train_png ImageFileName],[Path_write_test ImageFileName]);
+  end
+
+  fprintf(fileID, "version: 1 \n");
+  fprintf(fileID, "n_points:  23 \n");
+  fprintf(fileID, "{ \n");
+  for lm_counter=1:length(LMs)
+     fprintf(fileID, "%d %d \n",LMs(lm_counter,1),LMs(lm_counter,2));
+  end
+
+  fprintf(fileID, "} \n");      
+  fclose(fileID);
+
+
+end
+
+zippedfiles = zip([path_train_data 'Fold_' num2str(FoldCounter) '\helen.zip'] ,[path_train_data 'Fold_' num2str(FoldCounter) '\helen\']);
+status = rmdir([path_train_data 'Fold_' num2str(FoldCounter) '\helen\'], 's');
+
+
+```
+
+
+
