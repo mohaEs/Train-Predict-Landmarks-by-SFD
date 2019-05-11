@@ -50,7 +50,7 @@ Output of our experiment: (it was just 5 epochs which was trained on a few image
 ![Alt text](./output_predict/visualization/31681454_1.png?raw=true "Title")
 
 
-## hint: Converting your dataset 
+## hint: Converting dataset 
 This an exemplary code to create a zip file called helen.zip from your own dataset and landmarks which suitable format for training/predicting by above mentioned procedure.
 
 It is supposed our image files (.png) and landmark files (.csv) are in [path_train_data '\temp_train_png\'] and [ path_train_data '\temp_train_lm\'] folders with the same name correspondigly. My n_points was 23.
