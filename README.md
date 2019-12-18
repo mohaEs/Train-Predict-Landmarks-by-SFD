@@ -1,7 +1,7 @@
 # Shapenet for Landmark detection/localization
 # Train and predict
 
-This repository shows a detail example of using shapenet for landmark detection.
+This repository shows a detail example of using shape fitting by deepregression (called shapenet) for landmark detection.
 The original method and source repository is:
 https://github.com/justusschock/shapenet
 and please consider that first.
